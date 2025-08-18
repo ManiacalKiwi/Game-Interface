@@ -4,26 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Game Setup — Player Entry Form</title>
-  <style>
-    :root { --fg:#0f172a; --muted:#6b7280; --accent:#2563eb; --bg:#f8fafc; --panel:#ffffff; }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: radial-gradient(1200px 800px at 15% 0%, #eef2ff, #e2e8f0); color: var(--fg); display:flex; align-items:center; justify-content:center; min-height:100vh; padding: 24px; }
-    .card { width: min(960px, 100%); background: var(--panel); border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,.08); padding: 24px; }
-    h1 { margin: 0 0 4px; color:#0ea5e9; font-size: 28px; }
-    p { margin: 0 0 16px; color: var(--muted); }
-    form { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-    label { display: block; font-weight: 600; margin-bottom: 6px; }
-    input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 10px; background: #fff; font-size: 16px; }
-    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    textarea { min-height: 140px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-    .actions { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
-    .btn { padding: 10px 14px; border-radius: 12px; border: 1px solid #d1d5db; background: white; font-weight: 700; cursor: pointer; }
-    .btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
-    .btn:hover { filter: brightness(0.98); }
-    .full { grid-column: 1 / -1; }
-    .note { font-size: 13px; color: var(--muted); }
-    .row { display:flex; flex-direction:column; }
-  </style>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <div class="card">
@@ -35,14 +16,17 @@
         <label for="username">User Name</label>
         <input id="username" name="username" type="text" placeholder="e.g., ninja" required />
       </div>
+
       <div class="row">
         <label for="points">Point Total</label>
         <input id="points" name="points" type="number" min="0" step="1" placeholder="e.g., 100" required />
       </div>
+
       <div class="row">
         <label for="health">Health/Damage</label>
         <input id="health" name="health" type="number" min="0" step="1" placeholder="e.g., 50" required />
       </div>
+
       <div class="row">
         <label for="weapons">Weapons</label>
         <input id="weapons" name="weapons" type="text" placeholder="e.g., invisibility" required />
@@ -56,43 +40,19 @@
 
       <div class="full">
         <label for="output">Output</label>
-        <textarea id="output" readonly placeholder="Submitted details will appear here...\n\nExample:\nUser Name\tninja\nWeapons\tinvisibility\nHealth/Damage\t50\nPoint Total\t100"></textarea>
+        <textarea id="output" readonly placeholder="Submitted details will appear here...
+
+Example:
+User Name	ninja
+Weapons	invisibility
+Health/Damage	50
+Point Total	100"></textarea>
       </div>
     </form>
   </div>
 
-  <script>
-    const form = document.getElementById('setupForm');
-    const out = document.getElementById('output');
-    const clearBtn = document.getElementById('clear');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value.trim();
-      const weapons  = document.getElementById('weapons').value.trim();
-      const health   = document.getElementById('health').value;
-      const points   = document.getElementById('points').value;
-
-      if (!username || !weapons || health === '' || points === '') {
-        out.value = 'Please fill out all fields.';
-        return;
-      }
-
-      const lines = [
-        `User Name\t${username}`,
-        `Weapons\t${weapons}`,
-        `Health/Damage\t${health}`,
-        `Point Total\t${points}`,
-      ];
-      out.value = lines.join('\n');
-    });
-
-    clearBtn.addEventListener('click', () => {
-      form.reset();
-      out.value = '';
-      document.getElementById('username').focus();
-    });
-  </script>
+  <script src="js/app.js" defer></script>
 </body>
 </html>
+
 
